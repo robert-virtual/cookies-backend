@@ -1,0 +1,21 @@
+
+GET http://localhost:3021/users
+ 
+
+POST http://localhost:3021/users
+Content-Type: application/json
+
+{
+    "name":"Roberto",
+    "email":"robertocastillo94@gmail.om",
+    "password":"password"
+}
+
+###
+POST http://localhost:3021/users/login
+Content-Type: application/json
+
+{
+    "email":"robertocastillo94@gmail.om",
+    "password":"password"
+}
