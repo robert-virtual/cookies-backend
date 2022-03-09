@@ -1,4 +1,6 @@
 
+GET http://localhost:3021/posts/hide
+###
 GET http://localhost:3021/users
  
 
@@ -9,6 +11,14 @@ Content-Type: application/json
     "name":"Roberto",
     "email":"robertocastillo94@gmail.om",
     "password":"password"
+}
+
+###
+DELETE http://localhost:3021/users
+Content-Type: application/json
+
+{
+    "email":"code@code.com"
 }
 
 ###

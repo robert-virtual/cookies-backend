@@ -18,12 +18,26 @@ router.get("/", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
 router.get("/me", auth, async (req, res) => {
   const { useId } = req;
   try {
     const User = await getCollection("users");
     const me = await User.findOne({
       useId,
+    });
+    res.json(me);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.delete("/", async (req, res) => {
+  const { email } = req.body;
+  try {
+    const User = await getCollection("users");
+    const me = await User.deleteOne({
+      email,
     });
     res.json(me);
   } catch (error) {
@@ -100,9 +114,7 @@ router.post("/", async (req, res) => {
     let rtoken = genRefreshToken({ userId: user.insertedId });
     await User.updateOne(
       {
-        $where: {
-          _id: user.insertedId,
-        },
+        _id: user.insertedId,
       },
       {
         $set: {
@@ -124,6 +136,7 @@ router.post("/", async (req, res) => {
 
     res.json(user);
   } catch (error) {
+    console.log(error.message, req.body);
     res.status(500).json({ error: error.message, body: req.body });
   }
 });

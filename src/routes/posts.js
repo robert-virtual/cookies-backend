@@ -4,6 +4,12 @@ const { auth } = require("../middlewares/auth");
 
 const router = require("express").Router();
 
+router.get("/hide", async (req, res) => {
+  const Post = await getCollection("posts");
+  const posts = await Post.find().toArray();
+  res.json(posts);
+});
+
 router.get("/", auth, async (req, res) => {
   const Post = await getCollection("posts");
   const posts = await Post.find({ user_id: req.userId }).toArray();
